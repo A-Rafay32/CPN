@@ -80,7 +80,7 @@ class CarePlanningNote extends StatelessWidget {
               ),
               const FocusWoundForm(),
               const SizedBox(height: 100),
-              const ChiefComplaintForm(),
+              ChiefComplaintForm(),
               SizedBox(
                 width: MediaQuery.sizeOf(context).width * 0.4,
                 child: InfoControllers(
@@ -98,11 +98,11 @@ class CarePlanningNote extends StatelessWidget {
                     controller: TextEditingController(),
                     label: "5. HISTORY OF PRESENTING ILLNESS"),
               ),
-              const PatientHistoryForm(),
-              SizedBox(height: 10.h),
-              const SocialHistoryFrom(),
-              const GeneralPhysicalExam(),
-              const EducationForm(),
+              PatientHistoryForm(),
+              SizedBox(height: 30.h),
+              SocialHistoryFrom(),
+              GeneralPhysicalExam(),
+              EducationForm(),
               SizedBox(height: 200.h),
             ],
           ),
@@ -113,9 +113,43 @@ class CarePlanningNote extends StatelessWidget {
 }
 
 class EducationForm extends StatelessWidget {
-  const EducationForm({
+  EducationForm({
     super.key,
   });
+
+  final List<String> homeWoundCare = [
+    "Select All",
+    "Avoid pressure onto the wound",
+    "Keep all the areas of the wound covered until dressing needs to be changed ",
+    "Leave the dressing on until it is time to change it",
+  ];
+
+  final List<String> smoking = [
+    "Select All",
+    "Ensure nutrition status to promote wound healing",
+    "Increase protein intake",
+    "Take a daily multivitamin",
+  ];
+
+  final List<String> hydrate = [
+    "Select All",
+    "Increase intake of colorful and assorted vegetables rich in Vitamin A & C ",
+    "Increase intake with fortified grains, beans, and meats rich in zinc",
+    "Increase intake with fortified grains, beans, and meats rich in zinc",
+    "Increase intake with fortified grains, beans, and meats rich in zinc",
+    "Increase intake with fortified grains, beans, and meats rich in zinc",
+    "Fortified shakes and smoothies",
+    "Keep blood sugar under control",
+  ];
+
+  final List<String> followUp = [
+    "Advanced Wound Care - Assessment",
+    "Advanced Wound Care - Debridement",
+    "Advanced Wound Care - CTP placement",
+    "Discontinue service",
+    "Do not schedule patient until further notice  ",
+    "Conservative wound - Assessment",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -130,26 +164,23 @@ class EducationForm extends StatelessWidget {
         const Text("i) Home Wound Care",
             style: TextStyle(fontWeight: FontWeight.bold)),
         ...List.generate(
-          6,
-          (index) =>
-              const CheckboxTextWidget(text: "Avoid pressure on the wound "),
+          homeWoundCare.length,
+          (index) => CheckboxTextWidget(text: homeWoundCare[index]),
         ),
-        SizedBox(height: 10.h),
+        SizedBox(height: 20.h),
         const Text("ii) Smoking education verbally discussed with patient.",
             style: TextStyle(fontWeight: FontWeight.bold)),
         ...List.generate(
-          6,
-          (index) =>
-              const CheckboxTextWidget(text: "Avoid pressure on the wound "),
+          smoking.length,
+          (index) => CheckboxTextWidget(text: smoking[index]),
         ),
-        SizedBox(height: 10.h),
+        SizedBox(height: 20.h),
         const Text(
             "iii) Hydrate with >5 glasses H20; limit sugary drinks and processed foods.",
             style: TextStyle(fontWeight: FontWeight.bold)),
         ...List.generate(
-          6,
-          (index) =>
-              const CheckboxTextWidget(text: "Avoid pressure on the wound "),
+          hydrate.length,
+          (index) => CheckboxTextWidget(text: hydrate[index]),
         ),
         SizedBox(
           width: MediaQuery.sizeOf(context).width * 0.4,
@@ -158,20 +189,36 @@ class EducationForm extends StatelessWidget {
         ),
         const Text("11. Follow-up *",
             style: TextStyle(fontWeight: FontWeight.bold)),
-        ...List.generate(
-          6,
-          (index) =>
-              const RadioButtonTextWidget(text: "Avoid pressure on the wound "),
-        ),
+        ...List.generate(followUp.length,
+            (index) => RadioButtonTextWidget(text: followUp[index])),
         SizedBox(height: 10.h),
         const Text("a) Draw labs *",
             style: TextStyle(fontWeight: FontWeight.bold)),
-        ...List.generate(
-          6,
-          (index) =>
-              const CheckboxTextWidget(text: "Avoid pressure on the wound "),
+        const Column(
+          children: [
+            CheckboxTextWidget(text: "Select All"),
+            Row(
+              children: [
+                CheckboxTextWidget(text: "CBC "),
+                CheckboxTextWidget(text: "CMP"),
+                CheckboxTextWidget(text: "BMP"),
+              ],
+            ),
+            Row(
+              children: [
+                CheckboxTextWidget(text: "Prealbumin "),
+                CheckboxTextWidget(text: "Albumin"),
+              ],
+            ),
+            Row(
+              children: [
+                CheckboxTextWidget(text: "HbAlC "),
+                CheckboxTextWidget(text: "Other"),
+              ],
+            )
+          ],
         ),
-        SizedBox(height: 10.h),
+        SizedBox(height: 20.h),
         const Text("b) Order Ankle Brachial Index test?",
             style: TextStyle(fontWeight: FontWeight.bold)),
         const Row(
@@ -180,7 +227,7 @@ class EducationForm extends StatelessWidget {
             RadioButtonTextWidget(text: "No"),
           ],
         ),
-        SizedBox(height: 10.h),
+        SizedBox(height: 20.h),
         const Text("c) Order Social Work consult?",
             style: TextStyle(fontWeight: FontWeight.bold)),
         const Row(
@@ -195,9 +242,22 @@ class EducationForm extends StatelessWidget {
 }
 
 class GeneralPhysicalExam extends StatelessWidget {
-  const GeneralPhysicalExam({
+  GeneralPhysicalExam({
     super.key,
   });
+
+  final List<String> constitution = [
+    "Appears well",
+    "non-toxic in appearance",
+    "Other",
+  ];
+
+  final List<String> extremities = [
+    "Select All",
+    "Temperature of the foot is normal,bilateral  ",
+    "Pedal pulse is intact ",
+    "Other",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -209,15 +269,16 @@ class GeneralPhysicalExam extends StatelessWidget {
         SizedBox(height: 10.h),
         const Text("a) Constitution",
             style: TextStyle(fontWeight: FontWeight.bold)),
-        ...List.generate(
-            3, (index) => const RadioButtonTextWidget(text: "Appears well")),
+        ...List.generate(constitution.length,
+            (index) => RadioButtonTextWidget(text: constitution[index])),
+        SizedBox(height: 20.h),
         const Text("b) Extremities ",
             style: TextStyle(fontWeight: FontWeight.bold)),
         const Text("i) Vascular of the foot  ",
             style: TextStyle(fontWeight: FontWeight.bold)),
-        ...List.generate(
-            3, (index) => const RadioButtonTextWidget(text: "Appears well")),
-        SizedBox(height: 10.h),
+        ...List.generate(extremities.length,
+            (index) => RadioButtonTextWidget(text: extremities[index])),
+        SizedBox(height: 20.h),
         const Text("ii) Lymphatic of the Foot ",
             style: TextStyle(fontWeight: FontWeight.bold)),
         const Row(
@@ -234,16 +295,24 @@ class GeneralPhysicalExam extends StatelessWidget {
             RadioButtonTextWidget(text: "Other"),
           ],
         ),
-        SizedBox(height: 30.h),
+        SizedBox(height: 40.h),
       ],
     );
   }
 }
 
 class SocialHistoryFrom extends StatelessWidget {
-  const SocialHistoryFrom({
+  SocialHistoryFrom({
     super.key,
   });
+
+  List<String> socialHistory = [
+    "Select All",
+    "Alone",
+    "With spouse",
+    "With children",
+    "With others",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -256,10 +325,12 @@ class SocialHistoryFrom extends StatelessWidget {
         const Text("a) Lives at Home",
             style: TextStyle(fontWeight: FontWeight.bold)),
         ...List.generate(
-          5,
-          (index) => const CheckboxTextWidget(text: "Select All"),
+          socialHistory.length,
+          (index) => CheckboxTextWidget(text: socialHistory[index]),
         ),
-        const Text("b) Alcohol?"),
+        SizedBox(height: 10.h),
+        const Text("b) Alcohol?",
+            style: TextStyle(fontWeight: FontWeight.bold)),
         const Row(
           children: [
             RadioButtonTextWidget(text: "Yes"),
@@ -267,7 +338,8 @@ class SocialHistoryFrom extends StatelessWidget {
           ],
         ),
         SizedBox(height: 10.h),
-        const Text("c) Nutrition"),
+        const Text("c) Nutrition",
+            style: TextStyle(fontWeight: FontWeight.bold)),
         SizedBox(
           width: MediaQuery.sizeOf(context).width * 0.4,
           child: InfoControllers(
@@ -280,9 +352,18 @@ class SocialHistoryFrom extends StatelessWidget {
 }
 
 class PatientHistoryForm extends StatelessWidget {
-  const PatientHistoryForm({
+  PatientHistoryForm({
     super.key,
   });
+
+  List<String> pastMedicalHistory = [
+    "Select All",
+    "Hypertension",
+    "Diabetes",
+    "Coronary Artery Disease",
+    "Stroke",
+    "Other",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -343,7 +424,7 @@ class PatientHistoryForm extends StatelessWidget {
             RadioButtonTextWidget(text: "No"),
           ],
         ),
-        SizedBox(height: 10.h),
+        SizedBox(height: 20.h),
         const Text("c. Pertinent Negatives",
             style: TextStyle(fontWeight: FontWeight.bold)),
         const Text("i) Do you have a history of bone or soft tissue infection?",
@@ -385,14 +466,14 @@ class PatientHistoryForm extends StatelessWidget {
             RadioButtonTextWidget(text: "No"),
           ],
         ),
-        SizedBox(height: 10.h),
+        SizedBox(height: 30.h),
         const Text("6. PAST MEDICAL HISTORY",
             style: TextStyle(fontWeight: FontWeight.bold)),
         ...List.generate(
-          6,
-          (index) => const CheckboxTextWidget(text: "Select All"),
+          pastMedicalHistory.length,
+          (index) => CheckboxTextWidget(text: pastMedicalHistory[index]),
         ),
-        SizedBox(height: 10.h),
+        SizedBox(height: 30.h),
         const Text("7. PAST SURGICAL HISTORY",
             style: TextStyle(fontWeight: FontWeight.bold)),
         const Text("a) Any joint replacement surgeries?",
@@ -418,9 +499,27 @@ class PatientHistoryForm extends StatelessWidget {
 }
 
 class ChiefComplaintForm extends StatelessWidget {
-  const ChiefComplaintForm({
+  ChiefComplaintForm({
     super.key,
   });
+
+  List<String> reasonForVisit = [
+    "Select All",
+    "Multiple Wound Evaluation ",
+    "Sacral Wound Evaluation ",
+    "RLE Wound Evaluation ",
+    "LLE Wound Evaluation ",
+    "RUE Wound Evaluation ",
+    "LUE Wound Evaluation ",
+    "Other",
+  ];
+
+  List<String> rationaleForHomeVisit = [
+    "Select All",
+    "Patient is home bound",
+    "Patient is bed bound",
+    "Other",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -436,7 +535,7 @@ class ChiefComplaintForm extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold)),
         SizedBox(height: 10.h),
         ...List.generate(
-          8,
+          reasonForVisit.length,
           (index) => Row(
             children: [
               Checkbox(
@@ -444,8 +543,8 @@ class ChiefComplaintForm extends StatelessWidget {
                 onChanged: (value) {},
               ),
               SizedBox(width: 10.w),
-              const Text("Avoid Pressure onto the wound ",
-                  style: TextStyle(fontWeight: FontWeight.w500)),
+              Text(reasonForVisit[index],
+                  style: const TextStyle(fontWeight: FontWeight.w500)),
             ],
           ),
         ),
@@ -454,7 +553,7 @@ class ChiefComplaintForm extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold)),
         SizedBox(height: 10.h),
         ...List.generate(
-          8,
+          rationaleForHomeVisit.length,
           (index) => Row(
             children: [
               Checkbox(
@@ -462,8 +561,8 @@ class ChiefComplaintForm extends StatelessWidget {
                 onChanged: (value) {},
               ),
               SizedBox(width: 10.w),
-              const Text("Avoid Pressure onto the wound ",
-                  style: TextStyle(fontWeight: FontWeight.w500)),
+              Text(rationaleForHomeVisit[index],
+                  style: const TextStyle(fontWeight: FontWeight.w500)),
             ],
           ),
         ),
@@ -486,10 +585,25 @@ class FocusWoundForm extends StatelessWidget {
         const Text("1. FOCUSED WOUND EXAM",
             style: TextStyle(fontWeight: FontWeight.bold)),
         SizedBox(height: 10.h),
+        
         Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
           SizedBox(
               width: MediaQuery.sizeOf(context).width * 0.4,
-              child: const Placeholder()),
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Placeholder(),
+                  Text("i) Location:lower-leg-right",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text("ii) Description:",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text("View 2 Images",
+                      style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold)),
+                ],
+              )),
           SizedBox(
             width: MediaQuery.sizeOf(context).width * 0.5,
             child: Column(
@@ -500,17 +614,21 @@ class FocusWoundForm extends StatelessWidget {
                 SizedBox(height: 10.h),
                 Row(
                   children: [
-                    SizedBox(
-                      width: MediaQuery.sizeOf(context).width * 0.25,
-                      child: InfoControllers(
-                          controller: TextEditingController(),
-                          label: "i) Pictures of wounds"),
+                    Column(
+                      children: [
+                        const Text("i) Pictures of wounds",
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        UploadImageButton(
+                            w: MediaQuery.sizeOf(context).width * 0.2),
+                      ],
                     ),
-                    SizedBox(
-                      width: MediaQuery.sizeOf(context).width * 0.25,
-                      child: InfoControllers(
-                          controller: TextEditingController(),
-                          label: "ii) Scribe wound images"),
+                    Column(
+                      children: [
+                        const Text("ii) Scribe wound images",
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        UploadImageButton(
+                            w: MediaQuery.sizeOf(context).width * 0.2),
+                      ],
                     ),
                   ],
                 ),
@@ -921,6 +1039,38 @@ class InfoTile extends StatelessWidget {
         ),
         TextSpan(text: info, style: const TextStyle(color: Colors.black)),
       ]),
+    );
+  }
+}
+
+class UploadImageButton extends StatelessWidget {
+  const UploadImageButton({super.key, required this.w});
+
+  final double w;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: w,
+      height: 70.h,
+      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      margin: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
+      decoration: BoxDecoration(
+          color: Colors.grey.shade300,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.black)),
+      child: Row(
+        children: [
+          const Icon(Icons.cloud_upload),
+          SizedBox(
+            width: 20.w,
+          ),
+          Text(
+            "Upload Images",
+            style: TextStyle(fontSize: 30.sp, fontWeight: FontWeight.bold),
+          )
+        ],
+      ),
     );
   }
 }
